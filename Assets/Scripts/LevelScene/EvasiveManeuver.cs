@@ -11,7 +11,7 @@ public class EvasiveManeuver : MonoBehaviour {
 	
 	public float dodge;
 	public float smoothing;
-	public float baseSpeed;
+	public float speedMultiplier;
 	public float tilt;
 	public Range startWait;
 	public Range maneuverTime;
@@ -21,10 +21,16 @@ public class EvasiveManeuver : MonoBehaviour {
 	private float targetManeuver;
 	private float currentSpeed;
 	private Rigidbody rigidBody;
+	private GameController gameController;
 
 	void Start() {
 		rigidBody = GetComponent<Rigidbody>();
-		currentSpeed = baseSpeed;
+		GameObject gameControllerObject = GameObject.FindWithTag("GameController");
+		if (gameControllerObject != null) {
+			this.gameController = gameControllerObject.GetComponent<GameController>();
+		} else {
+			Debug.Log("Cannot find GameController");
+		}
 		StartCoroutine(Evade());
 	}
 
@@ -40,6 +46,7 @@ public class EvasiveManeuver : MonoBehaviour {
 
 	void FixedUpdate() {
 		float newManeuver = Mathf.MoveTowards(rigidBody.velocity.x, targetManeuver, Time.deltaTime * smoothing);
+		currentSpeed = gameController.Speed * speedMultiplier;
 		rigidBody.velocity = new Vector3(newManeuver, 0.0f, currentSpeed);
 		rigidBody.position = new Vector3(
 			Mathf.Clamp(rigidBody.position.x, boundary.xMin, boundary.xMax), 

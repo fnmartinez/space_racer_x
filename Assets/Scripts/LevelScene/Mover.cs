@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class Mover : MonoBehaviour {
 
-	public float speed;
+	public float speedMultiplier;
 
 	void Start() {
-		GetComponent<Rigidbody>().velocity = GetComponent<Transform>().forward * speed;
+		GameObject gameControllerObject = GameObject.FindWithTag("GameController");
+		if (gameControllerObject != null) {
+			GameController gameController = gameControllerObject.GetComponent<GameController>();
+			GetComponent<Rigidbody>().velocity = GetComponent<Transform>().forward * gameController.Speed * speedMultiplier;
+		} else {
+			Debug.Log("Cannot find GameController");
+		}
 	}
 }

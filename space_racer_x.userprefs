@@ -1,16 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/LevelScene/Mover.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/LevelScene/EvasiveManeuver.cs">
     <Files>
-      <File FileName="Assets/Scripts/LevelScene/PlayerController.cs" Line="28" Column="21" />
-      <File FileName="Assets/Scripts/LevelScene/Mover.cs" Line="10" Column="26" />
+      <File FileName="Assets/Scripts/LevelScene/PlayerController.cs" Line="62" Column="25" />
       <File FileName="Assets/Scripts/LevelScene/DestroyByBoundary.cs" Line="7" Column="37" />
-      <File FileName="Assets/Scripts/LevelScene/DestroyByContact.cs" Line="29" Column="39" />
-      <File FileName="Assets/Scripts/LevelScene/GameController.cs" Line="33" Column="49" />
+      <File FileName="Assets/Scripts/LevelScene/DestroyByContact.cs" Line="11" Column="2" />
+      <File FileName="Assets/Scripts/LevelScene/GameController.cs" Line="20" Column="2" />
       <File FileName="Assets/Scripts/LevelScene/DestroyByTime.cs" Line="10" Column="31" />
       <File FileName="Assets/Scripts/MainMenu/QuitOnClick.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/LevelScene/BackgroundScroller.cs" Line="14" Column="14" />
-      <File FileName="Assets/Scripts/LevelScene/WeaponController.cs" Line="16" Column="44" />
+      <File FileName="Assets/Scripts/LevelScene/BackgroundScroller.cs" Line="12" Column="2" />
+      <File FileName="Assets/Scripts/LevelScene/WeaponController.cs" Line="13" Column="2" />
+      <File FileName="Assets/Scripts/LevelScene/EvasiveManeuver.cs" Line="27" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

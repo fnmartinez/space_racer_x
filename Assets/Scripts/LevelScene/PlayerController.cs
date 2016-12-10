@@ -11,6 +11,8 @@ public class Boundary {
 public class PlayerController : MonoBehaviour {
 
 	public float speed;
+	public float horizontalSpeedMultiplier;
+	public float verticalSpeedMultiplier;
 	public float tilt;
 	public Boundary boundary;
 
@@ -27,7 +29,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void Destroy() {
 		Instantiate(explosion, transform.position, transform.rotation);
-		gameController.GameOver();
+		gameController.GameOver = true;
 		Destroy(gameObject);
 	}
 
@@ -48,20 +50,31 @@ public class PlayerController : MonoBehaviour {
 			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
 			audioSource.Play();
 		}
+		speed = this.gameController.Speed;
 	}
 
 	void FixedUpdate() {
-		float moveHorizontal = Input.GetAxis("Horizontal");
+		if (!gameController.GameOver) {
+			float moveHorizontal = Input.GetAxis("Horizontal");
+			float moveVertically = 1.0f;
 
-		Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f);
-		rigidBody.velocity = movement * speed;
+			Vector3 movement = new Vector3(moveHorizontal * horizontalSpeedMultiplier, 
+			                               0.0f, 
+			                               moveVertically * verticalSpeedMultiplier);
+			rigidBody.velocity = movement * this.gameController.Speed;
 
+			Clamp();
+
+			rigidBody.rotation = Quaternion.Euler(0.0f, 0.0f, GetComponent<Rigidbody>().velocity.x * -tilt);
+			//Debug.Log(rigidBody);
+		}
+	}
+
+	private void Clamp() {
 		rigidBody.position = new Vector3(
 			Mathf.Clamp(rigidBody.position.x, boundary.xMin, boundary.xMax), 
 			0.0f, 
 			Mathf.Clamp(rigidBody.position.z, boundary.zMin, boundary.zMax)
 		);
-
-		rigidBody.rotation = Quaternion.Euler(0.0f, 0.0f, GetComponent<Rigidbody>().velocity.x * -tilt);
 	}
 }
