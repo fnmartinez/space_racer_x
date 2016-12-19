@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using System;
 
 public class BackgroundScroller : MonoBehaviour {
 
@@ -23,7 +24,8 @@ public class BackgroundScroller : MonoBehaviour {
 	}
 
 	void Update() {
-		float newPosition = Mathf.Repeat(Time.time * gameController.Speed * speedMultiplier, tileSizeZ);
-		transform.position = startPosition + Vector3.forward * newPosition;
+		float newPosition = Mathf.Repeat(Time.time * speedMultiplier, tileSizeZ);
+		transform.position = startPosition + Vector3.forward * newPosition; 
+		//Debug.Log(String.Format("time={0} tileSizeZ={1} speed={2} speedMultiplier={3} "));
 	}
 }

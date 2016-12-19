@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class GameController : MonoBehaviour {
 
@@ -49,7 +50,7 @@ public class GameController : MonoBehaviour {
 	void Start() {
 		speed = baseSpeed;
 		nextSpeedChange = 0.0f;
-		Random.InitState(randomSeed);
+		UnityEngine.Random.InitState(randomSeed);
 		gameOverWindow.SetActive(false);
 		StartCoroutine(SpawnHazards());
 		UpdateScore();
@@ -59,8 +60,8 @@ public class GameController : MonoBehaviour {
 		yield return new WaitForSeconds(spawnStart);
 		while (!gameOver) {
 			for (int i = 0; i < hazardCounts; i++) {
-				GameObject hazard = hazards[Random.Range(0, hazards.Length)];
-				Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
+				GameObject hazard = hazards[UnityEngine.Random.Range(0, hazards.Length)];
+				Vector3 spawnPosition = new Vector3(UnityEngine.Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
 				Quaternion spawnRotation = Quaternion.identity;
 				Instantiate(hazard, spawnPosition, spawnRotation);
 				yield return new WaitForSeconds(spawnWait);
@@ -76,6 +77,7 @@ public class GameController : MonoBehaviour {
 		if (Time.time > nextSpeedChange && speed < maxSpeed) {
 			AlterSpeed(incrementSpeedDelta);
 			nextSpeedChange = Time.time + incrementTimeDelta;
+			Debug.Log(String.Format("speed={0} nextSpeedChange={1}", speed, nextSpeedChange));
 		}
 	}
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 [System.Serializable]
 public class Boundary {
@@ -66,6 +67,8 @@ public class PlayerController : MonoBehaviour {
 			Clamp();
 
 			rigidBody.rotation = Quaternion.Euler(0.0f, 0.0f, GetComponent<Rigidbody>().velocity.x * -tilt);
+			Debug.Log(String.Format("moveHorizontal={0} moveVertically={1} movement={2} velocity={3} rotation={4}",
+			                        moveHorizontal, moveVertically, movement, rigidBody.velocity, rigidBody.rotation));
 			//Debug.Log(rigidBody);
 		}
 	}
