@@ -6,8 +6,10 @@ public class DestroyByContact : MonoBehaviour {
 
 	public GameObject explosion;
 	public int scoreValue;
+	public double scoreProbability;
 
 	private GameController gameController;
+	private System.Random random;
 
 	void Start() {
 		GameObject gameControllerObject = GameObject.FindWithTag("GameController");
@@ -16,6 +18,7 @@ public class DestroyByContact : MonoBehaviour {
 		} else {
 			Debug.Log("Cannot find GameController");
 		}
+		random = new System.Random();
 	}
 
 	void OnTriggerEnter(Collider other) {
@@ -30,7 +33,9 @@ public class DestroyByContact : MonoBehaviour {
 		if (other.CompareTag("Player")) {
 			other.GetComponentInParent<PlayerController>().Destroy();
 		}
-		gameController.AddScore(scoreValue);
+		if (random.NextDouble() < scoreProbability) {
+			gameController.AddScore(scoreValue);
+		}
 		Destroy(other.gameObject);
 		Destroy(this.gameObject);
 	}
